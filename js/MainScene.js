@@ -6,7 +6,9 @@ export default class MainScene extends Phaser.Scene {
 
     preload(){     
         // Load the atlas for the player
-        this.load.atlas('female','assets/images/female.png','assets/images/female_atlas.json');              
+        this.load.atlas('female','assets/images/female.png','assets/images/female_atlas.json');  
+        // Load the animations for the player            
+        this.load.animation('female_anim','assets/images/female_anim.json');
     }
 
     create(){  
@@ -23,6 +25,8 @@ export default class MainScene extends Phaser.Scene {
     }
     
     update(){
+        // Play walking animation for the player
+        this.player.anims.play('female_walk',true);
         // Define the player movement
         const speed = 2.5;
         // Velocity vector (0,0)
