@@ -12,8 +12,7 @@ export default class MainScene extends Phaser.Scene {
 
     create(){  
         // create a sprite of the player using the Matter.js physics engine       
-        this.player = new Player({scene:this,x:0,y:0,texture:'female',frame:'townsfolk_f_idle_1'});
-        //this.add.existing(this.player); // Add the player to the scene
+        this.player = new Player({scene:this,x:0,y:0,texture:'female',frame:'townsfolk_f_idle_1'}); 
         // Add controls
         this.player.inputKeys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
