@@ -10,7 +10,8 @@ export default class MainScene extends Phaser.Scene {
         Player.preload(this); // Preload the player assets
         // Load the tilemap and tileset
         this.load.image('titles','assets/images/RPG Nature Tileset.png');
-        this.load.tilemapTiledJSON('map','assets/images/map.json');   
+        this.load.tilemapTiledJSON('map','assets/images/map.json'); 
+        this.load.atlas('resources','assets/images/resources.png','assets/images/resources_atlas.json');  
     }
 
     create(){  
@@ -23,6 +24,13 @@ export default class MainScene extends Phaser.Scene {
 
         layer1.setCollisionByProperty({collides:true});
         this.matter.world.convertTilemapLayer(layer1);
+
+        let tree = new Phaser.Physics.Matter.Sprite(this.matter.world,50,50,'resources','tree');
+        let rock = new Phaser.Physics.Matter.Sprite(this.matter.world,150,150,'resources','rock');
+        this.add.existing(tree);
+        this.add.existing(rock);
+        tree.setStatic(true);  // to prevent it from moving
+        rock.setStatic(true);  
 
         // create a sprite of the player using the Matter.js physics engine       
         this.player = new Player({scene:this,x:100,y:100,texture:'female',frame:'townsfolk_f_idle_1'}); 
