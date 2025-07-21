@@ -19,6 +19,7 @@ export default class MainScene extends Phaser.Scene {
         this.map = map; // store the map in the scene
         const tileset = map.addTilesetImage('RPG Nature Tileset','titles',32,32,0,0);  
         const layer1 = map.createStaticLayer('Capa de patrones 1', tileset,0,0);
+        const layer2 = map.createStaticLayer('Capa de patrones 2', tileset,0,0);
         // create a sprite of the player using the Matter.js physics engine       
         this.player = new Player({scene:this,x:0,y:0,texture:'female',frame:'townsfolk_f_idle_1'}); 
         // Add controls
