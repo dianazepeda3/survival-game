@@ -1,4 +1,5 @@
 import Player from "./Player.js";
+import Resource from "./Resource.js";
 
 // The class can be imported in other files "export default"
 export default class MainScene extends Phaser.Scene {
@@ -8,10 +9,10 @@ export default class MainScene extends Phaser.Scene {
 
     preload(){     
         Player.preload(this); // Preload the player assets
+        Resource.preload(this);
         // Load the tilemap and tileset
         this.load.image('titles','assets/images/RPG Nature Tileset.png');
-        this.load.tilemapTiledJSON('map','assets/images/map.json'); 
-        this.load.atlas('resources','assets/images/resources.png','assets/images/resources_atlas.json');  
+        this.load.tilemapTiledJSON('map','assets/images/map.json');         
     }
 
     create(){  
@@ -25,7 +26,8 @@ export default class MainScene extends Phaser.Scene {
         layer1.setCollisionByProperty({collides:true});
         this.matter.world.convertTilemapLayer(layer1);
         
-        this.addResources();
+        // Set the elements like tree and rock
+        this.map.getObjectLayer('Resources').objects.forEach(resource => new Resource({scene:this,resource}));
 
         // create a sprite of the player using the Matter.js physics engine       
         this.player = new Player({scene:this,x:100,y:100,texture:'female',frame:'townsfolk_f_idle_1'}); 
@@ -35,26 +37,6 @@ export default class MainScene extends Phaser.Scene {
             down: Phaser.Input.Keyboard.KeyCodes.S,
             left: Phaser.Input.Keyboard.KeyCodes.A,
             right: Phaser.Input.Keyboard.KeyCodes.D,
-        })
-    }
-
-    addResources(){
-        const resources = this.map.getObjectLayer('Resources');
-        resources.objects.forEach(resource => {
-            let resItem = new Phaser.Physics.Matter.Sprite(this.matter.world,resource.x,resource.y,'resources',resource.type);
-            let yOrigin = resource.properties.find(p => p.name === "yOrigin")?.value;
-            //console.log(resItem.type);
-            resItem.x += resItem.width/2;
-            resItem.y -= resItem.height/2;
-            resItem.y = resItem.y + resItem.height * (yOrigin - 0.5);
-
-            const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-            var circleCollider = Bodies.circle(resItem.x,resItem.y,12,{isSensor:false,label:'collider'});
-            
-            resItem.setExistingBody(circleCollider);
-            resItem.setStatic(true);  // to prevent it from moving           
-            resItem.setOrigin(0.5,yOrigin);
-            this.add.existing(resItem);
         })
     }
     
