@@ -20,8 +20,12 @@ export default class MainScene extends Phaser.Scene {
         const tileset = map.addTilesetImage('RPG Nature Tileset','titles',32,32,0,0);  
         const layer1 = map.createStaticLayer('Capa de patrones 1', tileset,0,0);
         const layer2 = map.createStaticLayer('Capa de patrones 2', tileset,0,0);
+
+        layer1.setCollisionByProperty({collides:true});
+        this.matter.world.convertTilemapLayer(layer1);
+
         // create a sprite of the player using the Matter.js physics engine       
-        this.player = new Player({scene:this,x:0,y:0,texture:'female',frame:'townsfolk_f_idle_1'}); 
+        this.player = new Player({scene:this,x:100,y:100,texture:'female',frame:'townsfolk_f_idle_1'}); 
         // Add controls
         this.player.inputKeys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
