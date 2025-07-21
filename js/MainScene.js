@@ -4,13 +4,15 @@ export default class MainScene extends Phaser.Scene {
         super("MainScene");
     }
 
-    preload(){        
-        console.log("preload");        
+    preload(){     
+        // Load the atlas for the player
+        this.load.atlas('female','assets/images/female.png','assets/images/female_atlas.json');              
     }
 
     create(){  
         // create a sprite of the player using the Matter.js physics engine       
-        this.player = new Phaser.Physics.Matter.Sprite(this.matter.world);
+        this.player = new Phaser.Physics.Matter.Sprite(this.matter.world,0,0,'female','townsfolk_f_idle_1');
+        this.add.existing(this.player); // Add the player to the scene
         // Add controls
         this.inputKeys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
