@@ -50,7 +50,7 @@ export default class Enemy extends MatterEntity {
                 this.setVelocityY(direction.y);
                 // if the player run away do not attack
                 if(this.attacktimer){
-                    clearInterval(this.attackTimer);
+                    clearInterval(this.attacktimer);
                     this.attacktimer = null;
                 }
             }else{
