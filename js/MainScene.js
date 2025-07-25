@@ -1,14 +1,17 @@
 import Player from "./Player.js";
+import Enemy from "./Enemy.js";
 import Resource from "./Resource.js";
 
 // The class can be imported in other files "export default"
 export default class MainScene extends Phaser.Scene {
     constructor() {
         super("MainScene");
+        this.enemies = [];
     }
 
     preload(){     
         Player.preload(this); // Preload the player assets
+        Enemy.preload(this);
         Resource.preload(this);
         // Load the tilemap and tileset
         this.load.image('titles','assets/images/RPG Nature Tileset.png');
@@ -28,6 +31,7 @@ export default class MainScene extends Phaser.Scene {
         
         // Set the elements like tree and rock
         this.map.getObjectLayer('Resources').objects.forEach(resource => new Resource({scene:this,resource}));
+        this.map.getObjectLayer('Enemies').objects.forEach(enemy => this.enemies.push(new Enemy({scene:this,enemy})));
 
         // create a sprite of the player using the Matter.js physics engine       
         this.player = new Player({scene:this,x:200,y:200,texture:'female',frame:'townsfolk_f_idle_1'}); 
@@ -41,6 +45,7 @@ export default class MainScene extends Phaser.Scene {
     }
     
     update(){
+        this.enemies.forEach(enemy => enemy.update());
         this.player.update();
     }
 }
