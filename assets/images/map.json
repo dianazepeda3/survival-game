@@ -38,6 +38,86 @@
         }, 
         {
          "draworder":"topdown",
+         "id":6,
+         "name":"Enemies",
+         "objects":[
+                {
+                 "gid":3,
+                 "height":32,
+                 "id":46,
+                 "name":"bear",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[241,280]"
+                        }, 
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":10
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":128,
+                 "y":127
+                }, 
+                {
+                 "gid":3,
+                 "height":32,
+                 "id":48,
+                 "name":"ent",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[201,203]"
+                        }, 
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":8
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":96,
+                 "y":352
+                }, 
+                {
+                 "gid":3,
+                 "height":32,
+                 "id":49,
+                 "name":"wolf",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[243]"
+                        }, 
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":354,
+                 "y":448
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":5,
          "name":"Resources",
          "objects":[
@@ -1113,8 +1193,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":46,
+ "nextlayerid":7,
+ "nextobjectid":50,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
