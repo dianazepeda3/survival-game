@@ -25,7 +25,7 @@ export default class Player extends MatterEntity {
         this.CreateMiningCollisions(playerSensor);
         this.CreatePickupCollisions(playerCollider);
         // Change the position of the player left or right depending on the pointer position
-        this.scene.input.on('pointermove',pointer => this.setFlipX(pointer.worldX < this.x));
+        this.scene.input.on('pointermove',pointer => { if(!this.dead) this.setFlipX(pointer.worldX < this.x) });
     }
 
     static preload(scene){
@@ -36,7 +36,15 @@ export default class Player extends MatterEntity {
         scene.load.spritesheet('items','assets/images/items.png',{frameWidth:32,frameHeight:32});
     } 
 
-    update(){             
+    onDeath = () => {
+        this.anims.stop();
+        this.setTexture('items',0);
+        this.setOrigin(0.5);
+        this.spriteWeapon.destroy();
+    };
+
+    update(){  
+        if(this.dead) return;
         // Define the player movement
         const speed = 2.5;
         // Velocity vector (0,0)
